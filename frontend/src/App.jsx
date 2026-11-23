@@ -43,6 +43,25 @@ function App() {
         }))
     }
 
+    function handleClaim(userId) {
+        socket.emit('claim-participant', {
+            participantId: userId,
+        }, (response) => {
+            if (!response.ok) {
+                console.error('Could not claim participant:', response.error)
+            }
+        })
+    }
+    function handleRelease(userId) {
+        socket.emit('release-participant', {
+            participantId: userId,
+        }, (response) => {
+            if (!response.ok) {
+                console.error('Could not release participant:', response.error)
+            }
+        })
+    }
+
     useEffect(() => {
         const zoomClient = ZoomMtgEmbedded.createClient()
 
